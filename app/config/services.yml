@@ -1,0 +1,10 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/service_container.html
+parameters:
+#    parameter_name: value
+
+services:
+
+    app.tools.user_manipulator:
+        class:      AppBundle\Tools\UserManipulator
+        arguments:  ['@fos_user.user_manager']
