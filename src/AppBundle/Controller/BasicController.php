@@ -6,12 +6,12 @@ use FOS\RestBundle\Controller\FOSRestController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 /**
- * Description of UsersController
+ * Description of APIController
  * 
- * @Route("/api")
+ * @Route("/basic")
  * @author George
  */
-class UsersController extends FOSRestController
+class BasicController extends FOSRestController
 {
 
     /**
@@ -36,9 +36,9 @@ class UsersController extends FOSRestController
      * 
      * @return View
      */
-    public function getUserAction($username) {
+    public function getUserAction($email) {
         $em = $this->getDoctrine()->getManager();
-        $data = $em->getRepository('AppBundle:User')->findBy(['username' => $username]);
+        $data = $em->getRepository('AppBundle:User')->findBy(['email' => $email]);
         
         if (!$data) {
             throw $this->createNotFoundException('Unable to find user entity');
