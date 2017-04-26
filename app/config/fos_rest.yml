@@ -2,22 +2,20 @@
 ---
 
 fos_rest:
+    disable_csrf_role: ROLE_ADMIN
     param_fetcher_listener: true
     body_listener: true
     format_listener:
         enabled: true
         rules:
             - { path: '^/', priorities: ['json', 'xml'], fallback_format: 'html' }
-#            - { path: '^/api', priorities: ['xml', 'json'], fallback_format: xml, attributes: { _controller: FOS\RestBundle\Controller\ExceptionController }, prefer_extension: false }
-#    versioning: true
-    view:
-        view_response_listener: 'force'
-#        empty_content: 204
     routing_loader:
         default_format: json
 sensio_framework_extra:
     view:
-        annotations: true
+        annotations: false
+    router:                    
+        annotations: true   
         
 twig:
 #    exception_controller: 'FOS\RestBundle\Controller\ExceptionController::showAction'

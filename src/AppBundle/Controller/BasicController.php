@@ -32,7 +32,7 @@ class BasicController extends FOSRestController
     }
 
     /**
-     * @Route("/get_user/{username}", name="get_user")
+     * @Route("/get_user/{email}", name="get_user")
      * 
      * @return View
      */
