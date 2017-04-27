@@ -40,8 +40,7 @@ class UserManipulator extends Manipulator
     {
         $user = $this->userManager->createUser();
         $user->setUsername($username);
-        $user->setFname($this->firstname);
-        $user->setSname($this->lastname);
+        $user->setApikey($this->apikey);
         $user->setEmail($email);
         $user->setPlainPassword($password);
         $user->setEnabled((Boolean) $active);
@@ -50,13 +49,8 @@ class UserManipulator extends Manipulator
         return $user;
     }
 
-    public function setFname($firstname)
+    public function setApikey($apikey)
     {
-        $this->firstname = $firstname;
-    }
-
-    public function setSname($lastname)
-    {
-        $this->lastname = $lastname;
+        $this->apikey = $apikey;
     }
 }

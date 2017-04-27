@@ -17,3 +17,5 @@ services:
     apikey_authenticator:
         class:  AppBundle\Security\ApiKeyAuthenticator
         public: false
+        arguments: 
+            keyName: '%api_key_name%'

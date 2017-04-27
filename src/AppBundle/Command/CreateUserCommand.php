@@ -27,8 +27,6 @@ class CreateUserCommand extends ContainerAwareCommand
                 ->setDescription('Create a user.')
                 ->setDefinition(array(
                     new InputArgument('username', InputArgument::REQUIRED, 'A username'),
-                    new InputArgument('firstname', InputArgument::REQUIRED, 'A first name'),
-                    new InputArgument('lastname', InputArgument::REQUIRED, 'A last name'),
                     new InputArgument('email', InputArgument::REQUIRED, 'An email'),
                     new InputArgument('password', InputArgument::REQUIRED, 'A password'),
                     new InputOption('inactive', null, InputOption::VALUE_NONE, 'Set the user as inactive'),
@@ -39,11 +37,11 @@ The <info>app:user:create</info> command creates a user:
 
   <info>php app/console app:user:create</info>
 
-This interactive shell will ask you for: username, email, first name, last name, password.
+This interactive shell will ask you for: username, email, password.
 
-You can alternatively specify the username, email, first name, last name, passworde as arguments:
+You can alternatively specify the username, email, password as arguments:
 
-  <info>php app/console app:user:create bborko borko@bogus.info Benny Borko mypassword</info>
+  <info>php app/console app:user:create bborko borko@bogus.info mypassword</info>
 
 You can create an inactive user (will not be able to log in):
 
@@ -59,19 +57,17 @@ EOT
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $username = $input->getArgument('username');
-        $firstname = $input->getArgument('firstname');
-        $lastname = $input->getArgument('lastname');
         $email = $input->getArgument('email');
         $password = $input->getArgument('password');
         $inactive = $input->getOption('inactive');
         $superadmin = $input->getOption('superadmin');
 
         $manipulator = $this->getContainer()->get('app.tools.user_manipulator');
-        $manipulator->setFname($firstname);
-        $manipulator->setSname($lastname);
+        $key = sha1($username . time());
+        $manipulator->setApikey($key);
         $manipulator->create($username, $password, $email, !$inactive, $superadmin);
 
-        $output->writeln(sprintf('Created user <comment>%s</comment>', $username));
+        $output->writeln(sprintf('Created user <comment>%s</comment>' . "\n" . 'API key: ' . $key, $username));
     }
 
     /**
@@ -95,38 +91,6 @@ EOT
             $question->setMaxAttempts(1);
 
             $input->setArgument('username', $helper->ask($input, $output, $question));
-        }
-
-        if (!$input->getArgument('firstname')) {
-            $question = new Question('Please enter a first name: ');
-            $question->setValidator(function ($answer) {
-                if (empty($answer)) {
-                    throw new \RuntimeException(
-                    'A first name is required'
-                    );
-                }
-
-                return $answer;
-            });
-            $question->setMaxAttempts(1);
-
-            $input->setArgument('firstname', $helper->ask($input, $output, $question));
-        }
-
-        if (!$input->getArgument('lastname')) {
-            $question = new Question('Please enter a lastname: ');
-            $question->setValidator(function ($answer) {
-                if (empty($answer)) {
-                    throw new \RuntimeException(
-                    'A last name is required'
-                    );
-                }
-
-                return $answer;
-            });
-            $question->setMaxAttempts(1);
-
-            $input->setArgument('lastname', $helper->ask($input, $output, $question));
         }
 
         if (!$input->getArgument('email')) {

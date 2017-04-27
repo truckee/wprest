@@ -15,12 +15,19 @@ use Symfony\Component\Security\Http\Authentication\SimplePreAuthenticatorInterfa
 
 class ApiKeyAuthenticator implements SimplePreAuthenticatorInterface
 {
+    
+    private $keyName;
+    
+    public function __construct($keyName) {
+        $this->keyName = $keyName;
+    }
 
     public function createToken(Request $request, $providerKey) {
         // look for an apikey query parameter
 //        $apiKey = $request->query->get('apikey');
         // or if you want to use an "apikey" header, then do something like this:
-        $apiKey = $request->headers->get('Apikey');
+        $keyName = $this->keyName;
+        $apiKey = $request->headers->get($keyName);
         if (!$apiKey) {
             throw new BadCredentialsException();
 
