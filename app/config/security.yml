@@ -11,8 +11,17 @@ security:
     providers:
         fos_userbundle:
             id: fos_user.user_provider.username
+        api_key_user_provider:
+            id: api_key_user_provider
 
     firewalls:
+        api:
+            pattern: ^/api/
+            stateless: true
+            simple_preauth:
+                authenticator: apikey_authenticator
+            provider: api_key_user_provider
+
         basic:
             pattern: ^/basic/
             http_basic: 
@@ -31,4 +40,5 @@ security:
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, role: ROLE_ADMIN }
+        - { path: ^/api/, role: ROLE_ADMIN }
         - { path: ^/basic/, role: ROLE_ADMIN }

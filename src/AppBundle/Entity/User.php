@@ -28,62 +28,32 @@ class User extends BaseUser
     /**
      * @var string
      *
-     * @ORM\Column(name="fname", type="string", length=25, nullable=false)
+     * @ORM\Column(name="apikey", type="string", length=40, nullable=false)
      */
-    protected $fname;
+    protected $apikey;
 
     /**
-     * @var string
+     * Set apikey.
      *
-     * @ORM\Column(name="sname", type="string", length=45, nullable=false)
-     */
-    protected $sname;
-
-    /**
-     * Set fname.
-     *
-     * @param string $fname
+     * @param string $apikey
      *
      * @return Usertable
      */
-    public function setFname($fname)
+    public function setApikey($apikey)
     {
-        $this->fname = $fname;
+        $this->apikey = $apikey;
 
         return $this;
     }
 
     /**
-     * Get fname.
+     * Get apikey.
      *
      * @return string
      */
-    public function getFname()
+    public function getApikey()
     {
-        return $this->fname;
+        return $this->apikey;
     }
 
-    /**
-     * Set sname.
-     *
-     * @param string $sname
-     *
-     * @return Usertable
-     */
-    public function setSname($sname)
-    {
-        $this->sname = $sname;
-
-        return $this;
-    }
-
-    /**
-     * Get sname.
-     *
-     * @return string
-     */
-    public function getSname()
-    {
-        return $this->sname;
-    }
 }

@@ -6,16 +6,16 @@ use FOS\RestBundle\Controller\FOSRestController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 /**
- * Description of APIController
+ * Description of NoneController
  * 
- * @Route("/basic")
+ * @Route("/")
  * @author George
  */
-class BasicController extends FOSRestController
+class NoneController extends FOSRestController
 {
 
     /**
-     * @Route("/get_users", name="basic_get_users")
+     * @Route("/get_users", name="none_get_users")
      * 
      * @return View
      */
@@ -32,7 +32,7 @@ class BasicController extends FOSRestController
     }
 
     /**
-     * @Route("/get_user/{email}", name="basic_get_user")
+     * @Route("/get_user/{email}", name="none_get_user")
      * 
      * @return View
      */
@@ -52,7 +52,7 @@ class BasicController extends FOSRestController
     }
 
     /**
-     * @Route("/get_hash/{username}", name="basic_get_hash")
+     * @Route("/get_hash/{username}", name="none_get_hash")
      * 
      * @return View
      */

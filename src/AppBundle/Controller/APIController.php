@@ -15,7 +15,7 @@ class APIController extends FOSRestController
 {
 
     /**
-     * @Route("/get_users", name="get_users")
+     * @Route("/get_users", name="api_get_users")
      * 
      * @return View
      */
@@ -32,13 +32,13 @@ class APIController extends FOSRestController
     }
 
     /**
-     * @Route("/get_user/{username}", name="get_user")
+     * @Route("/get_user/{email}", name="api_get_user")
      * 
      * @return View
      */
-    public function getUserAction($username) {
+    public function getUserAction($email) {
         $em = $this->getDoctrine()->getManager();
-        $data = $em->getRepository('AppBundle:User')->findBy(['username' => $username]);
+        $data = $em->getRepository('AppBundle:User')->findBy(['email' => $email]);
         
         if (!$data) {
             throw $this->createNotFoundException('Unable to find user entity');
@@ -52,7 +52,7 @@ class APIController extends FOSRestController
     }
 
     /**
-     * @Route("/get_hash/{username}", name="get_hash")
+     * @Route("/get_hash/{username}", name="api_get_hash")
      * 
      * @return View
      */
