@@ -21,7 +21,7 @@ class NoneController extends FOSRestController
      */
     public function getUsersAction() {
         $em = $this->getDoctrine()->getManager();
-        $data = $em->getRepository('AppBundle:User')->findAll();
+        $data = $em->getRepository('AppBundle:Member')->findAll();
         $view = $this->view($data, 200)
                 ->setFormat('json')
                 ->setTemplate("AppBundle:Users:getUsers.html.twig")
@@ -38,28 +38,8 @@ class NoneController extends FOSRestController
      */
     public function getUserAction($email) {
         $em = $this->getDoctrine()->getManager();
-        $data = $em->getRepository('AppBundle:User')->findBy(['email' => $email]);
-        
-        if (!$data) {
-            throw $this->createNotFoundException('Unable to find user entity');
-        }
-        $view = $this->view($data, 200)
-                ->setTemplate("AppBundle:Users:getUsers.html.twig")
-                ->setTemplateVar('user')
-        ;
+        $data = $em->getRepository('AppBundle:Member')->findBy(['email' => $email]);
 
-        return $this->handleView($view);
-    }
-
-    /**
-     * @Route("/get_hash/{username}", name="none_get_hash")
-     * 
-     * @return View
-     */
-    public function getUserHashAction($username) {
-        $em = $this->getDoctrine()->getManager();
-        $data = $em->getRepository('AppBundle:User')->getApiUserHash($username);
-        
         if (!$data) {
             throw $this->createNotFoundException('Unable to find user entity');
         }

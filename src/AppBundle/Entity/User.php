@@ -7,8 +7,10 @@ use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="AppBundle\Entity\UserRepository")
- * @ORM\Table(name="member")
+ * Users table contains entities authorized to query and modify member data
+ * 
+ * @ORM\Entity
+ * @ORM\Table(name="users")
  */
 class User extends BaseUser
 {
