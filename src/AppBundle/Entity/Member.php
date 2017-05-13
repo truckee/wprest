@@ -33,6 +33,12 @@ class Member
     private $password;
 
     /**
+     * @ORM\Column(name="enabled", type="boolean")
+     * @var string
+     */
+    private $enabled;
+
+    /**
      * Set email.
      *
      * @param string $email
@@ -78,6 +84,30 @@ class Member
     public function getPassword()
     {
         return $this->password;
+    }
+ 
+    /**
+     * Set enabled.
+     *
+     * @param string $enabled
+     *
+     * @return Member
+     */
+    public function setEnabled($enabled)
+    {
+        $this->enabled = $enabled;
+
+        return $this;
+    }
+
+    /**
+     * Get enabled.
+     *
+     * @return string
+     */
+    public function getEnabled()
+    {
+        return $this->enabled;
     }
    
 }
