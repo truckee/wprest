@@ -69,11 +69,17 @@ class APIController extends FOSRestController
         }
         $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         $password = substr(str_shuffle($chars), 0, 8);
-        $data->setPassword($password);
+        $crypted = password_hash($password, PASSWORD_BCRYPT);
+        $data->setPassword($crypted);
         $em->persist($data);
         $em->flush();
+        $member = [
+            'email' => $email,
+            'password' => $password,
+            'enabled' => $data->getEnabled()
+        ];
         
-        $view = $this->view($data, 200)
+        $view = $this->view($member, 200)
                 ->setTemplate("AppBundle:Users:getUsers.html.twig")
                 ->setTemplateVar('user')
         ;

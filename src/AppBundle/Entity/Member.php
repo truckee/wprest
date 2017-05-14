@@ -27,7 +27,7 @@ class Member
     private $email;
 
     /**
-     * @ORM\Column(name="password", type="string", length=40, nullable=true)
+     * @ORM\Column(name="password", type="string", length=255)
      * @var string
      */
     private $password;
