@@ -62,7 +62,7 @@ EOT
         $inactive = $input->getOption('inactive');
         $superadmin = $input->getOption('superadmin');
 
-        $manipulator = $this->getContainer()->get('app.tools.user_manipulator');
+        $manipulator = $this->getContainer()->get('app.services.user_manipulator');
         $key = sha1($username . time());
         $manipulator->setApikey($key);
         $manipulator->create($username, $password, $email, !$inactive, $superadmin);

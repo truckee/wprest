@@ -4,8 +4,6 @@ namespace tests\AppBundle\Controller;
 
 use Liip\FunctionalTestBundle\Test\WebTestCase;
 
-//use Tests\AppBundle\DatabasePrimer;
-
 /**
  * Description of APIControllerTest
  *
@@ -16,7 +14,7 @@ class APIControllerTest extends WebTestCase
 
     public function setup() {
         $this->loadFixtures(array(
-            'AppBundle\DataFixtures\Test\UsersMembers'
+            'AppBundle\DataFixtures\ORM\UsersMembers'
         ));
     }
 

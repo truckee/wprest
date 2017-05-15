@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Tools;
+namespace AppBundle\Services;
 
 use FOS\UserBundle\Model\UserManagerInterface;
 use FOS\UserBundle\Util\UserManipulator as Manipulator;

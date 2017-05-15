@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\DataFixtures\Test;
+namespace AppBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -19,7 +19,9 @@ class UsersMembers implements FixtureInterface
         $userAdmin = new User();
         $userAdmin->setUsername('admin');
         $userAdmin->setEmail('admin@bogus.info');
-        $userAdmin->setPassword('$2y$13$rxEZj2fW9U5BcZ8TGoTkTehKRRuVqnZorRmMm9uRm2CKDCdp/rtUO');
+        $userAdmin->setEnabled(true);
+        $userAdmin->addRole('ROLE_ADMIN');
+        $userAdmin->setPassword('$2y$13$X04gnptMF5BAOQ1XWKOEWuTj.s7vqHgU.4HiQK4hvFLcMFM5Nh/r2');
         $userAdmin->setApikey('3e2ec79352d2e9cbd76ad409d968ee435af6695c');
 
         $manager->persist($userAdmin);
