@@ -15,13 +15,13 @@ web_profiler:
 swiftmailer:
     disable_delivery: true
 
-#doctrine:
-#    dbal:
-#        default_connection: test
-#        connections:
-#            test:
-#                driver:   pdo_sqlite
-#                path:     '%kernel.cache_dir%/test.db'
+doctrine:
+    dbal:
+        default_connection: test
+        connections:
+            test:
+                driver:   pdo_sqlite
+                path:     '%kernel.cache_dir%/test.sqlite'
 
 liip_functional_test: 
     cache_sqlite_db: true
