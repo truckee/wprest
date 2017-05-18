@@ -25,7 +25,7 @@ class ActivateMemberCommand extends ContainerAwareCommand
                 new InputArgument('email', InputArgument::REQUIRED, 'The member\'s email address'),
             ))
             ->setHelp(<<<'EOT'
-The <info>app:member:activate</info> command activates a member (will not be able to sign in)
+The <info>app:member:activate</info> command activates a member (will be able to sign in)
 
   <info>php bin/console bborko@bogus.infoinfo>
 EOT

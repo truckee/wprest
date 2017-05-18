@@ -39,5 +39,18 @@ class APIControllerTest extends WebTestCase
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
     }
+    
+    public function testAPIResetPassword() {
+        $client = static::createClient();
+
+        $crawler = $client->request(
+                'POST', 'http://wprest/api/reset_password', [], [], [
+                    'HTTP_Api-key' => '3e2ec79352d2e9cbd76ad409d968ee435af6695c',
+                    'CONTENT_TYPE' => 'application/json',], 
+                '{"email":"developer@bogus.info", "hash":"xyzpm"}'
+        );
+
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+    }
 
 }
