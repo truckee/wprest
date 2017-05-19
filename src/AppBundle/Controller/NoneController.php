@@ -54,17 +54,57 @@ class NoneController extends FOSRestController
     }
 
     /**
+     * Set member password
+     * 
+     * Member entity is found in controller rather than service for better
+     * exception handling
+     * 
      * @Rest\Post("/set_password", name="none_set_password")
      * 
      * @param Request $request
      * @return View
      */
-    public function setUserPassword(Request $request) {
+    public function setMemberPassword(Request $request) {
         $email = $request->get('email');
+        $em = $this->getDoctrine()->getManager();
+        $member = $em->getRepository('AppBundle:Member')->findOneBy(['email' => $email]);
+        if (!$member) {
+            throw $this->createNotFoundException('Unable to find member entity');
+        }
         $rest = $this->container->get('app.rest_data');
-        $member = $rest->setUserPassword($email);
+        $data = $rest->setMemberPassword($member, $email);
         
-        $view = $this->view($member, 200)
+        $view = $this->view($data, 200)
+                ->setTemplate("AppBundle:Users:getUsers.html.twig")
+                ->setTemplateVar('user')
+        ;
+
+        return $this->handleView($view);
+    }
+
+    /**
+     * Reset member password
+     * 
+     * Member entity is found in controller rather than service for better
+     * exception handling
+     * 
+     * @Rest\Post("/reset_password", name="none_reset_password")
+     * 
+     * @param Request $request
+     * @return View
+     */
+    public function resetMemberPassword(Request $request) {
+        $email = $request->get('email');
+        $hash = $request->get('hash');
+        $em = $this->getDoctrine()->getManager();
+        $member = $em->getRepository('AppBundle:Member')->findOneBy(['email' => $email]);
+        if (!$member) {
+            throw $this->createNotFoundException('Unable to find member entity');
+        }
+        $rest = $this->container->get('app.rest_data');
+        $data = $rest->resetMemberPassword($member, $hash);
+        
+        $view = $this->view($data, 200)
                 ->setTemplate("AppBundle:Users:getUsers.html.twig")
                 ->setTemplateVar('user')
         ;

@@ -54,6 +54,11 @@ class APIController extends FOSRestController
     }
 
     /**
+     * Set member password
+     * 
+     * Member entity is found in controller rather than service for better
+     * exception handling
+     * 
      * @Rest\Post("/set_password", name="api_set_password")
      * 
      * @param Request $request
@@ -61,10 +66,15 @@ class APIController extends FOSRestController
      */
     public function setMemberPassword(Request $request) {
         $email = $request->get('email');
+        $em = $this->getDoctrine()->getManager();
+        $member = $em->getRepository('AppBundle:Member')->findOneBy(['email' => $email]);
+        if (!$member) {
+            throw $this->createNotFoundException('Unable to find member entity');
+        }
         $rest = $this->container->get('app.rest_data');
-        $member = $rest->setMemberPassword($email);
+        $data = $rest->setMemberPassword($member, $email);
         
-        $view = $this->view($member, 200)
+        $view = $this->view($data, 200)
                 ->setTemplate("AppBundle:Users:getUsers.html.twig")
                 ->setTemplateVar('user')
         ;
@@ -73,6 +83,11 @@ class APIController extends FOSRestController
     }
 
     /**
+     * Reset member password
+     * 
+     * Member entity is found in controller rather than service for better
+     * exception handling
+     * 
      * @Rest\Post("/reset_password", name="api_reset_password")
      * 
      * @param Request $request
@@ -81,10 +96,15 @@ class APIController extends FOSRestController
     public function resetMemberPassword(Request $request) {
         $email = $request->get('email');
         $hash = $request->get('hash');
+        $em = $this->getDoctrine()->getManager();
+        $member = $em->getRepository('AppBundle:Member')->findOneBy(['email' => $email]);
+        if (!$member) {
+            throw $this->createNotFoundException('Unable to find member entity');
+        }
         $rest = $this->container->get('app.rest_data');
-        $member = $rest->resetMemberPassword($email, $hash);
+        $data = $rest->resetMemberPassword($member, $hash);
         
-        $view = $this->view($member, 200)
+        $view = $this->view($data, 200)
                 ->setTemplate("AppBundle:Users:getUsers.html.twig")
                 ->setTemplateVar('user')
         ;

@@ -42,4 +42,18 @@ class BasicControllerTest extends WebTestCase
         $this->assertSame(200, $client->getResponse()->getStatusCode());
     }
 
+    public function testBasicResetPassword() {
+        $client = static::createClient();
+
+        $crawler = $client->request(
+                'POST', 'http://wprest/basic/reset_password', [], [], [
+            'PHP_AUTH_USER' => 'admin',
+            'PHP_AUTH_PW' => '123Abc',
+            'CONTENT_TYPE' => 'application/json',], 
+                '{"email":"developer@bogus.info", "hash":"xyzpm"}'
+        );
+
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+    }
+
 }

@@ -3,6 +3,7 @@
 namespace AppBundle\Services;
 
 use Doctrine\ORM\EntityManager;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
  * Description of RestData
@@ -11,45 +12,41 @@ use Doctrine\ORM\EntityManager;
  */
 class RestData
 {
+
     private $em;
 
     public function __construct(EntityManager $em) {
         $this->em = $em;
     }
-    
-    public function setMemberPassword($email) {
-        $data = $this->em->getRepository('AppBundle:Member')->findOneBy(['email' => $email]);
-        if (!$data) {
-            throw $this->createNotFoundException('Unable to find member entity');
-        }
+
+    public function setMemberPassword($member, $email) {
         $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         $password = substr(str_shuffle($chars), 0, 8);
         $hash = password_hash($password, PASSWORD_BCRYPT);
-        $data->setPassword($hash);
-        $this->em->persist($data);
+        $member->setPassword($hash);
+        $this->em->persist($member);
         $this->em->flush();
-        $member = [
+        
+        $data = [
             'email' => $email,
             'password' => $password,
-            'enabled' => $data->getEnabled()
+            'enabled' => $member->getEnabled()
         ];
-        
-        return $member;
+
+        return $data;
     }
-    
-    public function resetMemberPassword($email, $hash) {
-        $data = $this->em->getRepository('AppBundle:Member')->findOneBy(['email' => $email]);
-        if (!$data) {
-            throw $this->createNotFoundException('Unable to find member entity');
-        }
-        $data->setPassword($hash);
-        $this->em->persist($data);
+
+    public function resetMemberPassword($member, $hash) {
+        $email = $member->getEmail();
+        $member->setPassword($hash);
+        $this->em->persist($member);
         $this->em->flush();
-        $member = [
+        $data = [
             'email' => $email,
-            'enabled' => $data->getEnabled()
+            'enabled' => $member->getEnabled()
         ];
-        
-        return $member;
+
+        return $data;
     }
+
 }
