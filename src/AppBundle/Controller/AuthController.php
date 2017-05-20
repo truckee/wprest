@@ -9,33 +9,17 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Description of NoneController
+ * Description of APIController
  * 
  * @Route("/")
  * @author George
  */
-class NoneController extends FOSRestController
+class AuthController extends FOSRestController
 {
 
     /**
-     * @Rest\Get("/get_users", name="none_get_users")
-     * 
-     * @return View
-     */
-    public function getUsersAction() {
-        $em = $this->getDoctrine()->getManager();
-        $data = $em->getRepository('AppBundle:Member')->findAll();
-        $view = $this->view($data, 200)
-                ->setFormat('json')
-                ->setTemplate("AppBundle:Users:getUsers.html.twig")
-                ->setTemplateVar('users')
-        ;
-
-        return $this->handleView($view);
-    }
-
-    /**
-     * @Rest\Get("/get_user/{email}", name="none_get_user")
+     * @Rest\Get("/{type}/get_user/{email}", 
+     * requirements={"type":"api|basic|none"})
      * 
      * @return View
      */
@@ -59,7 +43,8 @@ class NoneController extends FOSRestController
      * Member entity is found in controller rather than service for better
      * exception handling
      * 
-     * @Rest\Post("/set_password", name="none_set_password")
+     * @Rest\Post("/{type}/set_password", 
+     * requirements={"type":"api|basic|none"})
      * 
      * @param Request $request
      * @return View
@@ -88,7 +73,8 @@ class NoneController extends FOSRestController
      * Member entity is found in controller rather than service for better
      * exception handling
      * 
-     * @Rest\Post("/reset_password", name="none_reset_password")
+     * @Rest\Post("/{type}/reset_password", 
+     * requirements={"type":"api|basic|none"})
      * 
      * @param Request $request
      * @return View
