@@ -22,7 +22,7 @@ class APIControllerTest extends WebTestCase
         $client = static::createClient();
 
         $crawler = $client->request(
-                'GET', 'http://api/get_user/bborko@bogus.info', [], [], ['HTTP_Api-key' => '3e2ec79352d2e9cbd76ad409d968ee435af6695c']
+                'GET', 'https://wprest/api/get_user/bborko@bogus.info', [], [], ['HTTP_Api-key' => '3e2ec79352d2e9cbd76ad409d968ee435af6695c']
         );
         $this->assertSame(200, $client->getResponse()->getStatusCode());
     }
@@ -31,7 +31,7 @@ class APIControllerTest extends WebTestCase
         $client = static::createClient();
 
         $crawler = $client->request(
-                'POST', 'http://wprest/api/set_password', [], [], [
+                'POST', 'https://wprest/api/set_password', [], [], [
                     'HTTP_Api-key' => '3e2ec79352d2e9cbd76ad409d968ee435af6695c',
                     'CONTENT_TYPE' => 'application/json',], 
                 '{"email":"developer@bogus.info"}'
@@ -44,7 +44,7 @@ class APIControllerTest extends WebTestCase
         $client = static::createClient();
 
         $crawler = $client->request(
-                'POST', 'http://wprest/api/reset_password', [], [], [
+                'POST', 'https://wprest/api/reset_password', [], [], [
                     'HTTP_Api-key' => '3e2ec79352d2e9cbd76ad409d968ee435af6695c',
                     'CONTENT_TYPE' => 'application/json',], 
                 '{"email":"developer@bogus.info", "hash":"xyzpm"}'
@@ -58,7 +58,7 @@ class APIControllerTest extends WebTestCase
             'PHP_AUTH_PW' => '123Abc',]);
 
         $crawler = $client->request(
-                'GET', 'http://basic/get_user/bborko@bogus.info'
+                'GET', 'https://wprest/basic/get_user/bborko@bogus.info'
         );
         $this->assertSame(200, $client->getResponse()->getStatusCode());
     }
@@ -67,7 +67,7 @@ class APIControllerTest extends WebTestCase
         $client = static::createClient();
 
         $crawler = $client->request(
-                'POST', 'http://wprest/basic/set_password', [], [], [
+                'POST', 'https://wprest/basic/set_password', [], [], [
             'PHP_AUTH_USER' => 'admin',
             'PHP_AUTH_PW' => '123Abc',
             'CONTENT_TYPE' => 'application/json',], '{"email":"developer@bogus.info"}'
@@ -80,7 +80,7 @@ class APIControllerTest extends WebTestCase
         $client = static::createClient();
 
         $crawler = $client->request(
-                'POST', 'http://wprest/basic/reset_password', [], [], [
+                'POST', 'https://wprest/basic/reset_password', [], [], [
             'PHP_AUTH_USER' => 'admin',
             'PHP_AUTH_PW' => '123Abc',
             'CONTENT_TYPE' => 'application/json',], 
@@ -94,7 +94,7 @@ class APIControllerTest extends WebTestCase
         $client = static::createClient();
 
         $crawler = $client->request(
-                'GET', 'http://none/get_user/bborko@bogus.info', [], [], []);
+                'GET', 'https://wprest/none/get_user/bborko@bogus.info', [], [], []);
         $this->assertSame(200, $client->getResponse()->getStatusCode());
     }
 
@@ -102,7 +102,7 @@ class APIControllerTest extends WebTestCase
         $client = static::createClient();
 
         $crawler = $client->request(
-                'POST', 'http://wprest/none/set_password', [], [], [
+                'POST', 'https://wprest/none/set_password', [], [], [
                     'CONTENT_TYPE' => 'application/json',], 
                 '{"email":"developer@bogus.info"}'
         );
@@ -114,7 +114,7 @@ class APIControllerTest extends WebTestCase
         $client = static::createClient();
 
         $crawler = $client->request(
-                'POST', 'http://wprest/none/reset_password', [], [], [
+                'POST', 'https://wprest/none/reset_password', [], [], [
                     'CONTENT_TYPE' => 'application/json',], 
                 '{"email":"developer@bogus.info", "hash":"xyzpm"}'
         );
