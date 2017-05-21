@@ -27,7 +27,14 @@ class ActivateMemberCommand extends ContainerAwareCommand
             ->setHelp(<<<'EOT'
 The <info>app:member:activate</info> command activates a member (will be able to sign in)
 
-  <info>php bin/console bborko@bogus.infoinfo>
+  <info>php bin/console app:member:activate</info>
+  
+This interactive shell will ask you for an email address
+
+You can alternatively specify the email address as an argument:
+
+  <info>php app/console app:user:member borko@bogus.info</info>
+
 EOT
             );
     }

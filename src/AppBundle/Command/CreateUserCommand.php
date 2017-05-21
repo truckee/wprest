@@ -43,10 +43,6 @@ You can alternatively specify the username, email, password as arguments:
 
   <info>php app/console app:user:create bborko borko@bogus.info mypassword</info>
 
-You can create an inactive user (will not be able to log in):
-
-  <info>php app/console app:user:create bborko --inactive</info>
-
 EOT
         );
     }

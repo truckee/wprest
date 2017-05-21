@@ -27,7 +27,14 @@ class DeactivateMemberCommand extends ContainerAwareCommand
             ->setHelp(<<<'EOT'
 The <info>app:member:deactivate</info> command deactivates a member (will not be able to sign in)
 
-  <info>php bin/console bborko@bogus.infoinfo>
+  <info>php bin/console app:member:deactivate</info>
+
+This interactive shell will ask you for an email address
+
+You can alternatively specify the email address as an argument:
+
+  <info>php app/console app:member:deactivate borko@bogus.info</info>
+
 EOT
             );
     }
