@@ -22,7 +22,7 @@ class APIControllerTest extends WebTestCase
         $client = static::createClient();
 
         $crawler = $client->request(
-                'GET', 'http://api/get_user/bborko@bogus.info', [], [], ['HTTP_Api-key' => '3e2ec79352d2e9cbd76ad409d968ee435af6695c']
+                'GET', 'http://wprest/api/get_user/developer@bogus.info', [], [], ['HTTP_Api-key' => '3e2ec79352d2e9cbd76ad409d968ee435af6695c']
         );
         $this->assertSame(200, $client->getResponse()->getStatusCode());
     }
@@ -58,7 +58,7 @@ class APIControllerTest extends WebTestCase
             'PHP_AUTH_PW' => '123Abc',]);
 
         $crawler = $client->request(
-                'GET', 'http://basic/get_user/bborko@bogus.info'
+                'GET', 'http://wprest/basic/get_user/developer@bogus.info'
         );
         $this->assertSame(200, $client->getResponse()->getStatusCode());
     }
@@ -94,7 +94,7 @@ class APIControllerTest extends WebTestCase
         $client = static::createClient();
 
         $crawler = $client->request(
-                'GET', 'http://none/get_user/bborko@bogus.info', [], [], []);
+                'GET', 'http://wprest/none/get_user/developer@bogus.info', [], [], []);
         $this->assertSame(200, $client->getResponse()->getStatusCode());
     }
 

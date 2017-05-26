@@ -60,7 +60,7 @@ EOT
         $manipulator = $this->getContainer()->get('app.services.member_manipulator');
         $manipulator->create($email, $password, !$inactive);
 
-        $output->writeln(sprintf('Created member <comment>%s</comment>', $email));
+        $output->writeln(sprintf('Created member %s', $email));
     }
 
     /**

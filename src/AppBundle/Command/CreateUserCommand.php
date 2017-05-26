@@ -63,7 +63,7 @@ EOT
         $manipulator->setApikey($key);
         $manipulator->create($username, $password, $email, !$inactive, $superadmin);
 
-        $output->writeln(sprintf('Created user <comment>%s</comment>' . "\n" . 'API key: ' . $key, $username));
+        $output->writeln(sprintf('Created user %s' . "\n" . 'API key: ' . $key, $username));
     }
 
     /**
