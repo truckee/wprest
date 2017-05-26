@@ -9,7 +9,7 @@ use Liip\FunctionalTestBundle\Test\WebTestCase;
  *
  * @author George
  */
-class APIControllerTest extends WebTestCase
+class SSLAuthControllerTest extends WebTestCase
 {
 
     public function setup() {
