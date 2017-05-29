@@ -51,36 +51,6 @@ class AuthController extends FOSRestController
      */
     public function setMemberPassword(Request $request) {
         $email = $request->get('email');
-        $em = $this->getDoctrine()->getManager();
-        $member = $em->getRepository('AppBundle:Member')->findOneBy(['email' => $email]);
-        if (!$member) {
-            throw $this->createNotFoundException('Unable to find member entity');
-        }
-        $rest = $this->container->get('app.rest_data');
-        $data = $rest->setMemberPassword($member, $email);
-        
-        $view = $this->view($data, 200)
-                ->setTemplate("AppBundle:Users:getUsers.html.twig")
-                ->setTemplateVar('user')
-        ;
-
-        return $this->handleView($view);
-    }
-
-    /**
-     * Reset member password
-     * 
-     * Member entity is found in controller rather than service for better
-     * exception handling
-     * 
-     * @Rest\Post("/{type}/reset_password", 
-     * requirements={"type":"api|basic|none"})
-     * 
-     * @param Request $request
-     * @return View
-     */
-    public function resetMemberPassword(Request $request) {
-        $email = $request->get('email');
         $hash = $request->get('hash');
         $em = $this->getDoctrine()->getManager();
         $member = $em->getRepository('AppBundle:Member')->findOneBy(['email' => $email]);
@@ -88,7 +58,7 @@ class AuthController extends FOSRestController
             throw $this->createNotFoundException('Unable to find member entity');
         }
         $rest = $this->container->get('app.rest_data');
-        $data = $rest->resetMemberPassword($member, $hash);
+        $data = $rest->setMemberPassword($member, $hash);
         
         $view = $this->view($data, 200)
                 ->setTemplate("AppBundle:Users:getUsers.html.twig")
