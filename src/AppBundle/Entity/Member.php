@@ -21,13 +21,13 @@ class Member
     protected $id;
 
     /**
-     * @ORM\Column(name="email", type="string", length=255, nullable=true)
+     * @ORM\Column(name="email", type="string", length=255)
      * @var string
      */
     private $email;
 
     /**
-     * @ORM\Column(name="password", type="string", length=255)
+     * @ORM\Column(name="password", type="string", length=255, nullable=true)
      * @var string
      */
     private $password;

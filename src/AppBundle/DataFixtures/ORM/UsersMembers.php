@@ -34,7 +34,6 @@ class UsersMembers implements FixtureInterface
         
         $member2 = new Member();
         $member2->setEmail('developer@bogus.info');
-        $member2->setPassword(false);
         $member2->setEnabled(true);
         $manager->persist($member2);
         

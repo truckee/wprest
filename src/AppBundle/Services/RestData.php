@@ -25,8 +25,7 @@ class RestData
         $this->em->flush();
         
         $data = [
-            'email' => $email,
-            'password' => $password,
+            'email' => $member->getEmail(),
             'enabled' => $member->getEnabled()
         ];
 
