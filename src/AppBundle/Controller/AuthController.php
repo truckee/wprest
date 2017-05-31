@@ -37,6 +37,27 @@ class AuthController extends FOSRestController
         return $this->handleView($view);
     }
 
+
+    /**
+     * @Rest\Get("/{type}/get_users",
+     * requirements={"type":"api|basic|none"})
+     *
+     * @return View
+     */
+    public function getUsersAction() {
+        $em = $this->getDoctrine()->getManager();
+        $data = $em->getRepository('AppBundle:Member')->findAll();
+        if (!$data) {
+            throw $this->createNotFoundException('Unable to find user entity');
+        }
+        $view = $this->view($data, 200)
+                ->setTemplate("AppBundle:Users:getUsers.html.twig")
+                ->setTemplateVar('user')
+        ;
+
+        return $this->handleView($view);
+    }
+
     /**
      * Set member password
      * 
