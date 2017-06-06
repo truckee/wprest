@@ -24,7 +24,7 @@ class CreateMemberCommand extends ContainerAwareCommand
                 ->setDescription('Add a member.')
                 ->setDefinition(array(
                     new InputArgument('email', InputArgument::REQUIRED, 'An email'),
-                    new InputArgument('password', InputArgument::REQUIRED, 'A password'),
+                    new InputArgument('password',InputOption::VALUE_NONE, 'A password'),
                     new InputOption('inactive', null, InputOption::VALUE_NONE, 'Set the user as inactive'),
                 ))
                 ->setHelp(<<<EOT
@@ -32,7 +32,7 @@ The <info>app:member:create</info> command creates an active member:
 
   <info>php bin/console app:member:create</info>
 
-This interactive shell will ask you for these fields:  email, password.
+This interactive shell will ask you for these fields:  email, password. A password is not required.
 
 You can alternatively specify the email, password as arguments:
 
@@ -87,13 +87,13 @@ EOT
         }
 
         if (!$input->getArgument('password')) {
-            $question = new Question('Please enter a password: ');
+            $question = new Question('(Optional) Enter a password: ');
             $question->setValidator(function ($answer) {
-                if (empty($answer)) {
-                    throw new \RuntimeException(
-                    'A password is required'
-                    );
-                }
+//                if (empty($answer)) {
+//                    throw new \RuntimeException(
+//                    'A password is required'
+//                    );
+//                }
 
                 return $answer;
             });

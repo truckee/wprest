@@ -38,7 +38,7 @@ The __wprest__ database will contain the following test credentials:
 	- password: 123Abc
 - admin: (for API key authentication):
 	- field name: Api-key
-	- key: $2y$13$X04gnptMF5BAOQ1XWKOEWuTj.s7vqHgU.4HiQK4hvFLcMFM5Nh/r2
+	- key: 3e2ec79352d2e9cbd76ad409d968ee435af6695c
 
 #### <a name="create">Creating users and members</a>
 
@@ -51,3 +51,11 @@ __wprest__ includes the following console commands:
 `$ php app/console app:user:create newadmin newadmin@bogus.info 123Abc`: To create a new user with username _newadmin_, email _newadmin@bogus.info_, and password _123Abc_, i.e., a user with credentials like that provided by a real RESTful API. Note that this user does NOT immediately have admin privileges.  See the next command. **This command will return an API key**
 
 `$ php bin/console fos:user:promote newadmin@bogus.info`: To add the role ROLE_ADMIN to the user _newadmin_
+
+#### Testing:
+
+
+
+- __Application__:The `.../test` directory contains a set of PHPUnit tests for the __wprest__ application. Tests can be run from the project command with a simple `phpunit` command (assuming PHPUnit is installed globally.) Note that the tests include SSL, so be sure to include a certificate (self-signed works) for the __wprest__ site.
+
+- __Plugin__: The PHP internal web server can be used to launch __wprest__ but should not be used for SSL tests. The internal server does not support https requests. 

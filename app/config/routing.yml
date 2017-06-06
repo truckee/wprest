@@ -1,8 +1,7 @@
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
-#    prefix:   /api/
-    
+
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
 
