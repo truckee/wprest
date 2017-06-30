@@ -12,13 +12,13 @@ wprest
 
 #### Database notes:
 
-This application can only add entities through the command line. There are two tables in the Sqlite database: member and user. Members are those to be authenticated by the RMA plugin. Users are the admin users capable of updating the member table. Members and users can only be created at the command line. See the notes below on [Creating users and members](#create). The application comes with a default user `admin` and two default members.
+This application can only add entities through the command line. There are two tables in the MySQL database: member and user. Members are those to be authenticated by the RMA plugin. Users are the admin users capable of updating the member table. Members and users can only be created at the command line. See the notes below on [Creating users and members](#create). The application comes with a default user `admin` and two default members.
 
 #### Installation
 
 - Either clone or download & unpack zip file from github.
 - In the __wprest__ directory run `composer install`
-	- You will need to provide database definition paramters *host*, *database name*, *user* (with *select* and *update* privileges), and *password*. Accept the default (`"%kernel.root_dir%/../var/data/data.sqlite"`) for the database path parameter.
+	- You will need to provide database definition paramters *host*, *database name*, *user* (with *select* and *update* privileges), and *password*. 
 	- If you will be using API key authentication, enter your API key field name, e.g., *Api-key*.
 - Run `$ php bin/console doctrine:database:create`
 - Run `$ php bin/console doctrine:schema:create`
@@ -33,6 +33,9 @@ The __wprest__ database will contain the following test credentials:
 	- email =  developer@bogus.info
     	- password = empty string (for testing registration)
     	- enabled = true
+	- email =  jglenshire@bogus.info
+    	- password = 123Abc
+    	- enabled = false
 - user: (for HTTP Basic):
 	- username: admin
 	- password: 123Abc
