@@ -38,5 +38,11 @@ class UsersMembers implements FixtureInterface
         $member2->setEnabled(true);
         $manager->persist($member2);
         
+        $member3 = new Member();
+        $member3->setEmail('jglenshire@bogus.info');
+        $member3->setPassword('$2y$10$AyrP6xfaHKbt8pOBYAc8lusg3.QJCMByXH/8mU9Xzwj33evkvg872');
+        $member3->setEnabled(false);
+        $manager->persist($member3);
+        
         $manager->flush();
     }}
