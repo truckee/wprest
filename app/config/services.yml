@@ -15,16 +15,13 @@ services:
 
     api_key_user_provider:
         class: AppBundle\Security\ApiKeyUserProvider
-        arguments:
-            em: '@doctrine.orm.entity_manager'
+        arguments: ['@doctrine.orm.entity_manager']
 
     apikey_authenticator:
         class:  AppBundle\Security\ApiKeyAuthenticator
         public: false
-        arguments: 
-            keyName: '%api_key_name%'
+        arguments: ['%api_key_name%']
 
     app.rest_data:
         class: AppBundle\Services\RestData
-        arguments:
-            em: '@doctrine.orm.entity_manager'
+        arguments: ['@doctrine.orm.entity_manager']
